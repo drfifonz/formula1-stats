@@ -51,7 +51,7 @@ app.layout = html.Div([
     # Dropdown for selecting the minimum year
     dcc.Dropdown(
         id='min-year-dropdown',
-        options=[{'label': str(year), 'value': year} for year in races_df['year'].unique()],
+        options=[{'label': str(year), 'value': year} for year in sorted(races_df['year'].unique())],
         value=races_df['year'].min(),
         clearable=False,
         style={'width': '200px'}
@@ -60,7 +60,7 @@ app.layout = html.Div([
     # Dropdown for selecting the maximum year
     dcc.Dropdown(
         id='max-year-dropdown',
-        options=[{'label': str(year), 'value': year} for year in races_df['year'].unique()],
+        options=[{'label': str(year), 'value': year} for year in sorted(races_df['year'].unique())],
         value=races_df['year'].max(),
         clearable=False,
         style={'width': '200px'}
@@ -74,13 +74,26 @@ app.layout = html.Div([
 #     [Input('year-slider', 'value')]
 # )
 @app.callback(
-    Output('f1-map', 'figure'),
-    [Input('min-year-dropdown', 'value'), Input('max-year-dropdown', 'value')]
+    Output('max-year-dropdown', 'options'),
+    Output('max-year-dropdown', 'value'),
+    [Input('min-year-dropdown', 'value')]
 )
-def update_graph(min_selected_year, max_selected_year):
+def update_max_year_options(selected_min_year):
+    available_max_years = [year for year in sorted(races_df['year'].unique()) if year >= selected_min_year]
+    options = [{'label': str(year), 'value': year} for year in available_max_years]
+    value = max(available_max_years) if available_max_years else None
+    return options, value
+
+
+@app.callback(
+    Output('f1-map', 'figure'),
+    [Input('min-year-dropdown', 'value'),
+     Input('max-year-dropdown', 'value')]
+)
+def update_graph(selected_min_year, selected_max_year):
     full_df = pd.merge(races_df, circuits_df, on='circuitId')
     full_df['country'] = full_df['country'].replace(country_mapping)
-    filtered_df = full_df[(full_df['year'] >= min_selected_year) & (full_df['year'] <= max_selected_year)]
+    filtered_df = full_df[(full_df['year'] >= selected_min_year) & (full_df['year'] <= selected_max_year)]
 
     # Races by country
     country_races = filtered_df['country'].value_counts().reset_index()
