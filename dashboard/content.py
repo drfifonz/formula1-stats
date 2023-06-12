@@ -27,6 +27,12 @@ tabs = dcc.Tabs(
             className="custom-tab",
             selected_className="custom-tab--selected",
         ),
+        dcc.Tab(
+            label="Year data",
+            value="yaer-tab",
+            className="custom-tab",
+            selected_className="custom-tab--selected",
+        ),
     ],
 )
 tabs_content = html.Div(id="tabs-example-content", className="main-panel")

@@ -3,6 +3,7 @@ from dashboard.index import app
 from dashboard.layout.tab_1 import tab_1
 from dashboard.layout.tab_2 import tab_2
 from dashboard.layout.tab_3 import tab_3
+from dashboard.layout.year_tab import year_tab
 from dash.dependencies import Input, Output
 
 
@@ -15,3 +16,5 @@ def select_tabs(tab):
         return tab_2
     elif tab == "tab-3":
         return tab_3
+    elif tab == "yaer-tab":
+        return year_tab

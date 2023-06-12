@@ -1,8 +1,6 @@
 import pandas as pd
-import plotly.express as px
-from dash import Input, Output, dash_table, dcc, html
+from dash import dash_table, dcc, html
 
-from dashboard.index import app
 
 df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv")
 
@@ -41,13 +39,3 @@ tab_3 = html.Div(
         ),
     ]
 )
-
-
-@app.callback(
-    Output(component_id="my-final-graph-example", component_property="children"),
-    Input(component_id="my-final-radio-item-example", component_property="value"),
-)
-def update_graph(col_chosen):
-    print("Xxxxxxxxxxxxxxxx")
-    fig = px.histogram(df, x="continent", y=col_chosen, histfunc="avg")
-    return fig
