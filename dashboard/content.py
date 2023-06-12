@@ -6,7 +6,7 @@ from dashboard.layout.callbacks import *  # noqa: F401, F403
 
 tabs = dcc.Tabs(
     id="app-tabs",
-    value="tab-1",
+    value="travel-year-tab",
     className="custom-tabs-container",
     children=[
         dcc.Tab(
@@ -28,11 +28,17 @@ tabs = dcc.Tabs(
             selected_className="custom-tab--selected",
         ),
         dcc.Tab(
-            label="Year data",
-            value="yaer-tab",
+            label="Year data",  # TODO how to name it?
+            value="travel-year-tab",
             className="custom-tab",
             selected_className="custom-tab--selected",
         ),
+        # dcc.Tab(
+        #     label="Year stats",
+        #     value="travel-year-tab",
+        #     className="custom-tab",
+        #     selected_className="custom-tab--selected",
+        # ),
     ],
 )
 tabs_content = html.Div(id="tabs-example-content", className="main-panel")
