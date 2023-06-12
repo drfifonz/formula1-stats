@@ -1,1 +1,9 @@
-# formula1-stats
+Formula1 stats
+===
+
+
+## How to run dashboard 
+
+```bash 
+python app.py
+```
