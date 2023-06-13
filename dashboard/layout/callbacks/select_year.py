@@ -139,7 +139,7 @@ def update_box_plot(raceId):
 
     buf = BytesIO()
     fig.savefig(buf, format="png")
-    plt.close()
+    plt.close()k
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     buf.close()
     return f"data:image/png;base64,{data}"
