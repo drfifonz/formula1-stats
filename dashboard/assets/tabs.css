@@ -98,14 +98,58 @@ body {
     border-top: 15px solid #e10600;
     border-right: 15px solid #e10600;
     border-radius: 0px 20px 0px 0px;
-    margin-top: 70px;
+    margin-top: 250px;
     margin-left: 70px;
     box-shadow: 2px 2px 20px #86868685;
     padding: 20px;
 }
+.podium-container {
+    display: flex;
+    justify-content: center;
+}
 
+.podium-drivers,
+.podium-constructors  {
+    display: flex;
+    align-items: flex-end;
+}
 
+.first-place,
+.second-place,
+.third-place {
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+}
 
+.first-place {
+    order: 2;
+    background-color: gold;
+    height: 100px;
+}
+
+.second-place {
+    order: 3;
+    background-color: silver;
+    height: 80px;
+}
+
+.third-place {
+    order: 1;
+    background-color: #cd7f32;
+    height: 60px;
+}
+
+.drivers-podium {  
+    position: absolute;
+    top: 120px;
+    left: 25%;
+}
+.constructors-podium {
+    position: absolute;
+    top: 300px;
+    left: 25%;
+}
 
 
 

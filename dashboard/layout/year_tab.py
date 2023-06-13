@@ -44,11 +44,11 @@ year_tab = html.Div(
             html.H5("Select year:"),
             dcc.Dropdown(id="years-dropdown", options=[{"label": i, "value": i} for i in YEARS], value=2022),
         ]),
+        html.Div(id="top-3-drivers-and-constructors", className="podium-container"),
         yaer_tabs,
         year_tabs_content,
     ],
 )
-
 # year_tab = html.Div(
 #     [
 #         html.H1("YEAR DATA"),

@@ -11,10 +11,17 @@ import matplotlib.pyplot as plt
 import time
 import matplotlib
 from datetime import datetime
+from dash import dash_table
+from dash import html
 
 matplotlib.use("agg")
 lap_times_df = pd.read_csv("data/lap_times.csv")
 drivers_df = pd.read_csv("data/drivers.csv")
+constructor_results_df = pd.read_csv("data/constructor_results.csv")
+constructor_standings_df = pd.read_csv("data/constructor_standings.csv")
+constructors_df = pd.read_csv("data/constructors.csv")
+driver_standings_df = pd.read_csv("data/driver_standings.csv")
+results_df = pd.read_csv("data/results.csv")
 
 
 @app.callback(
@@ -195,3 +202,61 @@ def update_races_year_dropdown(year):
     races = races_in_year.to_dict("records")
     # print(races[0]["name"])
     return [{"label": i["name"], "value": i["raceId"]} for i in races], races[0]["raceId"]
+
+
+@app.callback(
+    Output("top-3-drivers-and-constructors", "children"),
+    Input("years-dropdown", "value")
+)
+def update_top_3(year):
+    races_ids = races_df[races_df['year'] == year]['raceId'].tolist()
+    
+    # Drivers
+    drivers_points = results_df[results_df['raceId'].isin(races_ids)].groupby('driverId')['points'].sum().reset_index()
+    top_3_drivers = drivers_points.nlargest(3, 'points')
+    top_3_drivers = pd.merge(top_3_drivers, drivers_df, on='driverId')
+    top_3_drivers = top_3_drivers[['forename', 'surname', 'points']]
+    
+    # Constructors
+    constructors_points = constructor_results_df[constructor_results_df['raceId'].isin(races_ids)].groupby('constructorId')['points'].sum().reset_index()
+    top_3_constructors = constructors_points.nlargest(3, 'points')
+    top_3_constructors = pd.merge(top_3_constructors, constructors_df, on='constructorId')
+    top_3_constructors = top_3_constructors[['name', 'points']]
+    
+    # Tables
+    return [
+        html.Div([
+            html.H4('Top 3 Drivers'),
+            html.Div(className='podium-drivers', children=[
+                html.Div(className='third-place', children=[
+                    html.H5(f"{top_3_drivers.iloc[2]['forename']} {top_3_drivers.iloc[2]['surname']}"),
+                    html.P(f"{top_3_drivers.iloc[2]['points']} points")
+                ]),
+                html.Div(className='first-place', children=[
+                    html.H5(f"{top_3_drivers.iloc[0]['forename']} {top_3_drivers.iloc[0]['surname']}"),
+                    html.P(f"{top_3_drivers.iloc[0]['points']} points")
+                ]),
+                html.Div(className='second-place', children=[
+                    html.H5(f"{top_3_drivers.iloc[1]['forename']} {top_3_drivers.iloc[1]['surname']}"),
+                    html.P(f"{top_3_drivers.iloc[1]['points']} points")
+                ])
+            ]),
+        ], className='drivers-podium'),
+        html.Div([
+            html.H4('Top 3 Constructors'),
+            html.Div(className='podium-constructors', children=[
+                html.Div(className='third-place', children=[
+                    html.H5(f"{top_3_constructors.iloc[2]['name']}"),
+                    html.P(f"{top_3_constructors.iloc[2]['points']} points")
+                ]),
+                html.Div(className='first-place', children=[
+                    html.H5(f"{top_3_constructors.iloc[0]['name']}"),
+                    html.P(f"{top_3_constructors.iloc[0]['points']} points")
+                ]),
+                html.Div(className='second-place', children=[
+                    html.H5(f"{top_3_constructors.iloc[1]['name']}"),
+                    html.P(f"{top_3_constructors.iloc[1]['points']} points")
+                ])
+            ]),
+        ], className='constructors-podium')
+    ]
