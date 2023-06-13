@@ -1,67 +1,167 @@
-<<<<<<< HEAD
-.custom-tabs-container {
-    width: 85%;
+@import url('https://www.formula1.com/etc/designs/fom-website/fonts/F1Regular/Formula1-Regular.woff2');
+@font-face { font-family: f1; 
+    src: url('https://www.formula1.com/etc/designs/fom-website/fonts/F1Regular/Formula1-Regular.woff2'); } 
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0px;
+    margin: 0px;
+    font-family: f1 !important;
 }
-.custom-tabs {
-    border-top-left-radius: 3px;
-    background-color: #f9f9f9;
-    padding: 0px 24px;
-    border-bottom: 1px solid #d6d6d6;
+#app-tabs {
+    box-shadow: 2px 2px 50px #000;
+}
+.map-analysis-tab, .dataframe-tab, .year-data-tab, .logo{
+    background-color: #e10600 !important;
+    color: #ffffff !important;
+    border: 0px !important;
+    font-size: 2rem;
+}
+#min-year-dropdown, 
+#max-year-dropdown {
+    z-index: 1;
+}
+.logo-f1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 77px;
+    background-color: #e10600 !important;
+    background-image: url("f1_logo.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90px, 90px;
+}
+.dataframe-tab{
+    margin-left: 100px;
+}
+.f1-dataset {
+    font-size: 4rem !important; 
+}
+#tabs-example-content {
+    padding: 50px;
+    margin-bottom: 100px;
+}
+.tab--selected {
+    background-color: #b80600 !important;
+    border-top: 0px solid #000 !important;
+    border-bottom: 5px solid #000 !important;
+}
+#log-map {
+    position: absolute !important;
+    right: 150px !important;
+    top: 380px !important;
+    z-index: 1;
+}
+#f1-map{
+    border-top: 15px solid #e10600;
+    border-right: 15px solid #e10600;
+    border-radius: 0px 20px 0px 0px;
+    margin-top: 20px;
+    margin-left: 70px;
+    box-shadow: 2px 2px 20px #86868685;
+    padding: 20px;
+}
+#years-dropdown {
+    width: 200px !important;
+}
+#year-div-select {
+    margin-left: 50px;
 }
 
-.custom-tab {
-    color:#586069;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-top: 3px solid transparent !important;
-    border-left: 0px !important;
-    border-right: 0px !important;
-    border-bottom: 0px !important;
-    background-color: #fafbfc;
-    padding: 12px !important;
-    font-family: "system-ui";
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-}
-.custom-tab--selected {
+.map-tab,
+.stats-tab {
+    width: 500px !important;
+    position: absolute;
+    background-color: white !important;
     color: black;
-    box-shadow: 1px 1px 0px white;
-    border-left: 1px solid lightgrey !important;
-    border-right: 1px solid lightgrey !important;
-    border-top: 3px solid #e36209 !important;
+    font-size: 1.8rem;
 }
-=======
-.custom-tabs-container {
-    width: 85%;
+.stats-tab {
+    top: 180px;
+    right: 5%;
 }
-.custom-tabs {
-    border-top-left-radius: 3px;
-    background-color: #f9f9f9;
-    padding: 0px 24px;
-    border-bottom: 1px solid #d6d6d6;
+.map-tab {
+    top: 250px;
+    right: 5%;
+}
+.tab--selected {
+    background-color: #b80600 !important;
+    border-top: 0px solid #000 !important;
+    border-bottom: 5px solid #000 !important;
+    color: white !important;
 }
 
-.custom-tab {
-    color:#586069;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-top: 3px solid transparent !important;
-    border-left: 0px !important;
-    border-right: 0px !important;
-    border-bottom: 0px !important;
-    background-color: #fafbfc;
-    padding: 12px !important;
-    font-family: "system-ui";
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
+#tabs-year-content {
+    border-top: 15px solid #e10600;
+    border-right: 15px solid #e10600;
+    border-radius: 0px 20px 0px 0px;
+    margin-top: 70px;
+    margin-left: 70px;
+    box-shadow: 2px 2px 20px #86868685;
+    padding: 20px;
 }
-.custom-tab--selected {
-    color: black;
-    box-shadow: 1px 1px 0px white;
-    border-left: 1px solid lightgrey !important;
-    border-right: 1px solid lightgrey !important;
-    border-top: 3px solid #e36209 !important;
+
+
+
+
+
+
+.cell-table {
+    border-collapse: collapse !important;
+    margin: 25px 0 !important;
+    font-size: 0.9em !important;
+    font-family: f1 !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+    border: 0px !important;
 }
->>>>>>> 44c3a6036ca7cb19d0820bc3f869ca088c520c0e
+.cell-table tbody {
+    border-radius: 16px !important;
+}
+.cell-table thead tr {
+    background-color: #e10600 !important;
+    color: #ffffff !important;
+    border-radius: 16px !important;
+}
+.cell-table th {
+    color: #ffffff !important;
+    background-color: #e10600 !important;
+    text-align: right !important;
+}
+.cell-table th,
+.cell-table td {
+    border: 0px !important;
+}
+.cell-table th,
+.cell-table td {
+    padding: 8px 12px !important;
+}
+.cell-table tbody tr {
+    border-bottom: 1px solid #dddddd !important;
+}
+
+.cell-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3 !important;
+}
+
+.cell-table tbody tr:last-of-type {
+    border-bottom: 2px solid #e10600 !important;
+}
+.cell-table tbody tr.active-row {
+    font-weight: bold !important;
+    color: #e10600 !important;
+}
+
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    background-clip: content-box;
+}

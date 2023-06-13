@@ -1,6 +1,5 @@
 # content.py
 from dash import dcc, html
-
 from dashboard.index import app
 from dashboard.layout.callbacks import *  # noqa: F401, F403
 
@@ -10,41 +9,31 @@ tabs = dcc.Tabs(
     className="custom-tabs-container",
     children=[
         dcc.Tab(
-            label="Tab1",
-            value="tab-1",
-            className="custom-tab",
-            selected_className="custom-tab--selected",
-        ),
-        dcc.Tab(
-            label="Tab2",
-            value="tab-2",
-            className="custom-tab",
-            selected_className="custom-tab--selected",
-        ),
-        dcc.Tab(
-            label="Tab3-example",
+            label="DataFrame",
             value="tab-3",
-            className="custom-tab",
+            className="dataframe-tab",
             selected_className="custom-tab--selected",
         ),
         dcc.Tab(
-            label="Year data",  # TODO how to name it?
-            value="travel-year-tab",
-            className="custom-tab",
+            label="F1 Map Analysis",
+            value="tab-2",
+            className="map-analysis-tab",
             selected_className="custom-tab--selected",
         ),
-        # dcc.Tab(
-        #     label="Year stats",
-        #     value="travel-year-tab",
-        #     className="custom-tab",
-        #     selected_className="custom-tab--selected",
-        # ),
+        dcc.Tab(
+            label="F1 Data By Year",
+            value="travel-year-tab",
+            className="year-data-tab",
+            selected_className="custom-tab--selected",
+        ),
     ],
 )
 tabs_content = html.Div(id="tabs-example-content", className="main-panel")
+logo = html.Div(id="logo-f1", className="logo-f1")
 app.layout = html.Div(
     [
         # header,
+        logo,
         tabs,
         tabs_content,
     ]
